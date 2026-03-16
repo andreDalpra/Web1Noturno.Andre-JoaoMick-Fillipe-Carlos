@@ -1,86 +1,230 @@
-:root
-{
+:root {
     /* VARIÁVEIS DE CORES */
     --azul_claro: #0044E1;
     --azul_escuro: #001EFF;
     --azul_mais_escuro: #0044E1;
     --branco: #FFFFFF;
     --cinza: #AFB9C1;
-}
- /* header css */
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family: Arial, Helvetica, sans-serif;
+    --cinza_login: #ebe6e6;
+    --cinza_escuro: #6b6b6b;
 }
 
-.header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:#001EFF;
-padding:15px 40px;
-color:white;
+/* PRINCIPAIS */
+
+input, select, textarea {
+    padding: 10px;
+    border: 1px solid var(--cinza);
+    border-radius: 0.6rem;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 12px;
 }
 
-.left-area{
-display:flex;
-align-items:center;
-gap:30px;
+input:hover, select:hover, textarea:hover{
+    border: 1px solid var(--cinza_escuro);
 }
 
-.logo{
-font-size:22px;
-font-weight:bold;
+/* login.html */
+
+.login-page {
+    background-color: var(--cinza_login);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-login {
+    width: 350px;
+    padding: 20px;
+    background-color: var(--cinza_login);
+    border-radius: .6 rem;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: var(--azul_claro);
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.5s ease;
+}
+
+.btn-login:hover {
+    background-color: var(--azul_escuro);
+    transform: scale(1.03);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+/* header css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #001EFF;
+    padding: 15px 40px;
+    color: white;
+}
+
+.left-area {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
 }
 
 /* MENU */
 
-.menu ul{
-list-style:none;
+.menu>ul {
+    list-style: none;
+    display: flex;
 }
 
-.menu a{
-color:white;
-text-decoration:none;
-font-size:15px;
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 8px 12px;
+    display: block;
 }
 
 /* DROPDOWN */
 
-.dropdown{
-position:relative;
+.dropdown {
+    position: relative;
 }
 
-.submenu{
-position:absolute;
-top:30px;
-left:0;
-background:#0044E1;
-list-style:none;
-border-radius:6px;
-min-width:150px;
-display:none;
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #0044E1;
+    list-style: none;
+    border-radius: 6px;
+    min-width: 160px;
+    display: none;
+    padding: 5px 0;
 }
 
-.submenu li{
-padding:10px;
+.submenu li {
+    display: block;
 }
 
-.submenu li:hover{
-background:#0A02E0;
+.submenu li a {
+    padding: 10px 15px;
 }
 
-.dropdown:hover .submenu{
-display:block;
+.submenu li:hover {
+    background: #0A02E0;
+}
+
+
+/* mantém aberto ao passar o mouse */
+.dropdown:hover .submenu {
+    display: block;
 }
 
 /* USUARIO */
 
-.user-area{
-background:#0044E1;
-padding:8px 15px;
-border-radius:6px;
+.user-area {
+    background: #0044E1;
+    padding: 8px 15px;
+    border-radius: 6px;
 }
- /* header css */
+
+/* DROPDOWN USUÁRIO */
+
+.user-area ul {
+    list-style: none;
+}
+
+.dropdown-user {
+    position: relative;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+.dropdown-user a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    display: block;
+}
+
+/* SUBMENU */
+
+.submenu-user {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: #0044E1;
+    border-radius: 6px;
+    min-width: 120px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+    transition: 0.2s ease;
+}
+
+.submenu-user li {
+    padding: 10px 15px;
+}
+
+.submenu-user li:hover {
+    background: #0A02E0;
+    border-radius: 6px;
+}
+
+.submenu-user a {
+    color: white;
+}
+
+/* ATIVAÇÃO DO MENU */
+
+.dropdown-user:hover .submenu-user {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* header css */
+
+
+/* FOOTER */
+
+.footer {
+    background: #001EFF;
+    color: white;
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-left {
+    font-size: 14px;
+}
+
+/* FOOTER */
