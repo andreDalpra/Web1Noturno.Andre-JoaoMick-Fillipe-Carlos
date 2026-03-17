@@ -7,6 +7,14 @@
     --cinza: #AFB9C1;
     --cinza_login: #ebe6e6;
     --cinza_escuro: #6b6b6b;
+    --font_login: 'anthropicSans', sans-serif;
+}
+
+@font-face {
+    font-family: 'anthropicSans';
+    src: url('../fonts/Serifa.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 /* PRINCIPAIS */
@@ -19,6 +27,7 @@ input, select, textarea {
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 12px;
+    height: 43px;
 }
 
 input:hover, select:hover, textarea:hover{
@@ -36,7 +45,8 @@ input:hover, select:hover, textarea:hover{
 }
 
 .container-login {
-    width: 350px;
+     width: 100%;
+    max-width: 420px;
     padding: 20px;
     background-color: var(--cinza_login);
     border-radius: .6 rem;
@@ -68,12 +78,18 @@ input:hover, select:hover, textarea:hover{
     transform: translateY(0);
 }
 
+.form-group input::placeholder{
+    color: var(--cinza);
+    font-family: var(--font_login);
+    font-weight: 430;
+}
+
 /* header css */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font_login);
 }
 
 .header {
@@ -209,9 +225,6 @@ input:hover, select:hover, textarea:hover{
     visibility: visible;
     transform: translateY(0);
 }
-
-/* header css */
-
 
 /* FOOTER */
 
