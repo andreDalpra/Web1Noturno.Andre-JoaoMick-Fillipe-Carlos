@@ -5,7 +5,7 @@
     --azul_mais_escuro: #0044E1;
     --branco: #FFFFFF;
     --cinza: #AFB9C1;
-    --cinza_login: #ebe6e6;
+    --cinza_login: #FAF9F5;
     --cinza_escuro: #6b6b6b;
     --font_login: 'anthropicSans', sans-serif;
 }
@@ -22,7 +22,7 @@
 input, select, textarea {
     padding: 10px;
     border: 1px solid var(--cinza);
-    border-radius: 0.6rem;
+    border-radius: 10px;
     font-size: 14px;
     width: 100%;
     box-sizing: border-box;
@@ -34,7 +34,7 @@ input:hover, select:hover, textarea:hover{
     border: 1px solid var(--cinza_escuro);
 }
 
-/* login.html */
+/*LOGIN.HTML*/
 
 .login-page {
     background-color: var(--cinza_login);
@@ -45,11 +45,22 @@ input:hover, select:hover, textarea:hover{
 }
 
 .container-login {
-     width: 100%;
+    width: 100%;
     max-width: 420px;
-    padding: 20px;
-    background-color: var(--cinza_login);
-    border-radius: .6 rem;
+    padding: 30px 25px;
+
+    background-color: white; /* destaque */
+    border-radius: 20px; /* bem arredondado */
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* sombra suave */
+
+    text-align: center;
+}
+
+.container-login h1{
+    font-size: 28px;
+    margin-bottom: 25px;
+    margin-top: 5px;
 }
 
 .btn-login {
@@ -78,13 +89,29 @@ input:hover, select:hover, textarea:hover{
     transform: translateY(0);
 }
 
-.form-group input::placeholder{
+.form-login input::placeholder{
     color: var(--cinza);
     font-family: var(--font_login);
     font-weight: 430;
 }
 
-/* header css */
+.form-login{
+    margin-bottom: 15px;
+}
+
+.titulo-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo-login h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* HEADER CSS */
 * {
     margin: 0;
     padding: 0;
