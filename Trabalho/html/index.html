@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Trabalho 1</title>
+        <title>Trabalho</title>
         <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
@@ -9,23 +9,34 @@
         </header>
         <nav>
         </nav>
-        <article>
+        <article id="conteudo" class="content">
+            
+
         </article>
         <footer id="rodape" class="footer">
         </footer>
     
+    
     <script>
-        fetch('../html/header.html')
+        fetch('header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('cabecalho').innerHTML = data;
             });
 
-        fetch('../html/footer.html')
+        fetch('footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('rodape').innerHTML = data;
             });
+        fetch('telaTreino.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('conteudo').innerHTML = data;
+                
+                iniciarTreinos();
+            }); 
     </script>
+    <script src="script.js"></script>
     </body>
 </html>

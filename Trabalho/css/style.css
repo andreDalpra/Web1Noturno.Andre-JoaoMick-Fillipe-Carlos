@@ -19,7 +19,20 @@
 
 /* PRINCIPAIS */
 
-input, select, textarea {
+body{
+    font-family: var(--font_login);
+    background-color: var(--cinza_login);
+    color: var(--cinza_escuro);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+input,
+select,
+textarea {
     padding: 10px;
     border: 1px solid var(--cinza);
     border-radius: 10px;
@@ -30,8 +43,23 @@ input, select, textarea {
     height: 43px;
 }
 
-input:hover, select:hover, textarea:hover{
+input:hover,
+select:hover,
+textarea:hover {
     border: 1px solid var(--cinza_escuro);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
 }
 
 /*LOGIN.HTML*/
@@ -46,56 +74,68 @@ input:hover, select:hover, textarea:hover{
 
 .container-login {
     width: 100%;
-    max-width: 420px;
-    padding: 30px 25px;
+    max-width: 900x;
+    padding: 45px 40px;
 
-    background-color: white; /* destaque */
-    border-radius: 20px; /* bem arredondado */
+    background-color: white;
+    border-radius: 20px;
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* sombra suave */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 
     text-align: center;
 }
 
-.container-login h1{
-    font-size: 28px;
+.titulo-login h1 {
+    font-size: 60px;
+    /* bem maior */
+    font-weight: 700;
     margin-bottom: 25px;
-    margin-top: 5px;
 }
 
-.btn-login {
+.form-login input {
     width: 100%;
-    padding: 12px 16px;
+    padding: 14px 16px;
+    /* input maior */
+    font-size: 16px;
+
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.btn {
+    width: 100%;
+    padding: 14px 16px;
+    /* botão maior */
     background-color: var(--azul_claro);
     color: white;
 
     border: none;
     border-radius: 8px;
 
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
 
     cursor: pointer;
 
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
 }
 
-.btn-login:hover {
+.btn:hover {
     background-color: var(--azul_escuro);
     transform: scale(1.03);
 }
 
-.btn-login:active {
+.btn:active {
     transform: translateY(0);
 }
 
-.form-login input::placeholder{
+.form-login input::placeholder {
     color: var(--cinza);
     font-family: var(--font_login);
     font-weight: 430;
 }
 
-.form-login{
+.form-login {
     margin-bottom: 15px;
 }
 
@@ -261,10 +301,46 @@ input:hover, select:hover, textarea:hover{
     padding: 30px 20px;
     display: flex;
     align-items: center;
+    font-family: var(--font_login);
 }
 
-.footer-left {
+.footer-content {
     font-size: 14px;
 }
 
-/* FOOTER */
+/* TELA TREINOS - inicio */
+.body-treinos {
+    font-family: Arial;
+    background: #0b1d36;
+    color: white;
+}
+
+.conteudo-treino {
+    width: 80%;
+    margin: auto;
+    margin-top: 40px;
+    height: 75vh;
+}
+
+.modal-treino {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+    background: white;
+    color: black;
+    padding: 20px;
+    width: 300px;
+    margin: 150px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* TELA TREINOS - fim */
