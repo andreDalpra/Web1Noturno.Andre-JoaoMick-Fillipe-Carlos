@@ -344,4 +344,28 @@ td {
     gap: 10px;
 }
 
+.btn-add {
+    padding: 12px 20px;
+    background-color: var(--azul_escuro);
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+    
+   
+    display: block;
+    margin: 0 auto;
+
+}
+.info{
+    text-align: center;
+    margin-bottom: 20px;
+}
 /* TELA TREINOS - fim */
