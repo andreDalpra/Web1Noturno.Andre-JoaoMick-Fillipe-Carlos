@@ -1,9 +1,11 @@
 <section class="conteudo-treino">
-    <div class="info"><h3>Bem vindo, [Nome do Usuário] preencha as informações do treino</h3></div>
-    
+    <div class="info">
+        <h3 id="usuario"></h3>
+    </div>
+
     <button id="addBtn" class="btn-add">Adicionar</button>
     <div class="body-treinos">
-        
+
 
         <table id="tabelaTreinos">
             <thead>
@@ -18,9 +20,6 @@
 
             <tbody></tbody>
         </table>
-
-
-
 
         <!-- MODAL -->
         <div id="modal" class="modal-treino">
@@ -43,4 +42,9 @@
             </div>
         </div>
     </div>
+    <script src="../js/script.js"></script>
+    <script>
+        document.getElementById("usuario").textContent = "Bem-vindo, " + getUsuarioLogado() + "!";
+    </script>
+
 </section>

@@ -1,6 +1,57 @@
-console.log("JS carregou")
+//JAVASCRIPT PARA AS TELAS 
 
-window.iniciarTreinos = function() {
+// Variável global com o usuário logado
+var usuarioLogado = null;
+
+function validaLogin() {
+    var email = document.getElementById("EDemail").value.trim();
+    var senha = document.getElementById("EDsenha").value.trim();
+
+    //Funcao de erro
+    function erroLogin(p_mensagem) {
+        alert(p_mensagem);
+        document.getElementById("EDemail").value = "";
+        document.getElementById("EDsenha").value = "";
+        document.getElementById("EDemail").focus();
+    }
+
+    // Validação de campos vazios
+    if (email === "" || senha === "") {
+        erroLogin("Por favor, preencha todos os campos.");
+        return false;
+    }
+
+    // Validação de formato do email
+    var regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!regexEmail.test(email)) {
+        erroLogin("Por favor, insira um e-mail válido.");
+        return false;
+    }
+
+    // Validação do tamanho mínimo da senha
+    if (senha.length < 6) {
+        erroLogin("A senha deve ter pelo menos 6 caracteres.");
+        return false;
+    }
+
+    // Extrai o nome de usuário antes do @
+    var nomeUsuario = email.split("@")[0];
+
+    // Define o usuário logado e redireciona para o index
+    usuarioLogado = { email: email, nome: nomeUsuario };
+    sessionStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
+    window.location.href = window.location.origin + "/Trabalho/html/index.html";
+
+    return true;
+}
+
+function getUsuarioLogado() {
+    var usuarioLogado = JSON.parse(sessionStorage.getItem("usuarioLogado"));
+    return usuarioLogado ? usuarioLogado.nome : null;
+}
+
+//Gerencia a parte de treinos, permitindo criar, editar e deletar treinos
+window.iniciarTreinos = function () {
     console.log("FUNÇÃO INICIOU")
     let tabela = document.querySelector("#tabelaTreinos tbody")
     let modal = document.getElementById("modal")
@@ -97,7 +148,7 @@ window.iniciarTreinos = function() {
 
 
     // editar
-    window.editar = function(index) {
+    window.editar = function (index) {
 
         let t = treinos[index]
 
@@ -113,7 +164,7 @@ window.iniciarTreinos = function() {
 
 
     // deletar
-    window.deletar = function(index) {
+    window.deletar = function (index) {
 
         if (confirm("Deseja realmente deletar este treino?")) {
             treinos.splice(index, 1)
