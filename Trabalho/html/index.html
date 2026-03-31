@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Trabalho</title>
-        <link rel="stylesheet" href="../css/style.css">
-    </head>
-    <body>
-        <header id="cabecalho" class="header">  
-        </header>
-        <nav>
-        </nav>
-        <article id="conteudo" class="content">
-        </article>
-        <footer id="rodape" class="footer">
-        </footer>
-    
-    
+
+<head>
+    <title>Trabalho</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <header id="cabecalho" class="header">
+    </header>
+    <nav>
+    </nav>
+    <article id="conteudo" class="content">
+    </article>
+    <footer id="rodape" class="footer">
+    </footer>
+
+    <script src="../js/script.js"></script>
     <script>
         fetch('header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('cabecalho').innerHTML = data;
+                document.getElementById("nomeHeader").textContent = getUsuarioLogado()?.nome || "Usuário";
             });
 
         fetch('footer.html')
@@ -28,13 +31,12 @@
                 document.getElementById('rodape').innerHTML = data;
             });
         fetch('telaTreino.html')
-            .then(response => response.text())
+            .then(r => r.text())
             .then(data => {
                 document.getElementById('conteudo').innerHTML = data;
-                
+                document.getElementById("nomeUsuario").textContent = getUsuarioLogado()?.nome || "Usuário";
                 iniciarTreinos();
-            }); 
+            });
     </script>
-    <script src="../js/script.js"></script>
-    </body>
+</body>
 </html>

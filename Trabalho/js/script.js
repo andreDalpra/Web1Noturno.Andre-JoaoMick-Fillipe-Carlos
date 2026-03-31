@@ -1,5 +1,5 @@
 //JAVASCRIPT PARA AS TELAS 
-
+console.log("SCRIPT JS CARREGOU");
 // Variável global com o usuário logado
 var usuarioLogado = null;
 
@@ -46,12 +46,12 @@ function validaLogin() {
 }
 
 function getUsuarioLogado() {
-    var usuarioLogado = JSON.parse(sessionStorage.getItem("usuarioLogado"));
-    return usuarioLogado ? usuarioLogado.nome : null;
+    console.log("Obtendo usuário logado...")
+    return JSON.parse(sessionStorage.getItem("usuarioLogado"));
 }
 
 //Gerencia a parte de treinos, permitindo criar, editar e deletar treinos
-window.iniciarTreinos = function () {
+function iniciarTreinos() {
     console.log("FUNÇÃO INICIOU")
     let tabela = document.querySelector("#tabelaTreinos tbody")
     let modal = document.getElementById("modal")

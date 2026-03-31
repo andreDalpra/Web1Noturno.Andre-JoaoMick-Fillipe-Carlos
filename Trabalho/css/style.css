@@ -28,7 +28,7 @@ body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    flex: 1;
+    /*flex: 1;*/
 }
 
 input,
@@ -64,18 +64,26 @@ td {
 }
 
 /*LOGIN.HTML*/
-
+#rodape2{
+  width: 100%;
+  color: white;
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+    font-family: var(--font_login);
+}
 .login-page {
     background-color: var(--cinza_login);
-    height: 100vh;
+    /*height: 100vh;*/
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
 }
 
 .container-login {
     width: 100%;
-    max-width: 900x;
+    max-width: 900px;
     padding: 45px 40px;
 
     background-color: white;
@@ -84,6 +92,8 @@ td {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 
     text-align: center;
+    
+
 }
 
 .titulo-login h1 {
@@ -144,6 +154,8 @@ td {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    flex: 1;
 }
 
 .titulo-login h1 {
@@ -179,6 +191,8 @@ td {
     font-size: 22px;
     font-weight: bold;
 }
+
+#usuarioHeade
 
 /* MENU */
 
@@ -303,6 +317,7 @@ td {
     display: flex;
     align-items: center;
     font-family: var(--font_login);
+    margin-top: auto;
 }
 
 .footer-content {

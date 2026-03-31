@@ -25,7 +25,20 @@
             </form>
         </div>
     </div>
-    <script src="../js/script.js"></script>
+        <footer id="rodape2" class="footer">
+        </footer>
+    <script src="../js/script.js">   
+    </script>
+
+<script>
+    // carrega o footer
+    fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('rodape').innerHTML = data;
+        });;
+</script>
+
 </body>
 
 </html>
