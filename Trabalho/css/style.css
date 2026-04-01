@@ -64,14 +64,6 @@ td {
 }
 
 /*LOGIN.HTML*/
-#rodape2{
-  width: 100%;
-  color: white;
-    padding: 30px 20px;
-    display: flex;
-    align-items: center;
-    font-family: var(--font_login);
-}
 .login-page {
     background-color: var(--cinza_login);
     /*height: 100vh;*/
@@ -318,6 +310,11 @@ td {
     align-items: center;
     font-family: var(--font_login);
     margin-top: auto;
+    width: 100%;
+}
+
+.login-page .footer {
+    align-self: stretch;
 }
 
 .footer-content {

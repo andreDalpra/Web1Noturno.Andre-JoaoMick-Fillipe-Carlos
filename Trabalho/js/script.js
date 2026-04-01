@@ -40,14 +40,20 @@ function validaLogin() {
     // Define o usuário logado e redireciona para o index
     usuarioLogado = { email: email, nome: nomeUsuario };
     sessionStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
-    window.location.href = window.location.origin + "/Trabalho/html/index.html";
+    window.location.href = "index.html";
 
     return true;
 }
 
 function getUsuarioLogado() {
-    console.log("Obtendo usuário logado...")
     return JSON.parse(sessionStorage.getItem("usuarioLogado"));
+}
+
+function deslogar() {
+    //Removendo a session do usuario logado e redirecionando para a tela de login
+    usuarioLogado = null;
+    sessionStorage.removeItem("usuarioLogado");
+    window.location.href = "login.html";
 }
 
 //Gerencia a parte de treinos, permitindo criar, editar e deletar treinos
