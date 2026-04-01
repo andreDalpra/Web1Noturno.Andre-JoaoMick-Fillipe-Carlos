@@ -11,7 +11,8 @@
 <body class="login-page">
 
     <div class="titulo-login">
-        <h1>Login</h1>
+        <div class="login-logo">Fit Manager</div>
+        <p class="login-subtitulo">Acesse sua conta para gerenciar seus treinos.</p>
 
         <div class="container-login">
             <form class="form-login">
@@ -21,8 +22,15 @@
                 <div class="form-login">
                     <input id="EDsenha" type="password" placeholder="Insira sua senha" required>
                 </div>
+                <div class="login-opcoes">
+                    <label class="lembrar-me">
+                        <input type="checkbox" id="lembrarMe">
+                        <span>Lembrar-me</span>
+                    </label>
+                </div>
                 <button type="button" class="btn" onclick="validaLogin()">Entrar</button>
             </form>
+            <p class="cadastro-link">Nao tem conta? <a href="#">Cadastrar-se</a></p>
         </div>
     </div>
         <footer id="rodape" class="footer">

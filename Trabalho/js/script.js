@@ -37,28 +37,50 @@ function validaLogin() {
     // Extrai o nome de usuário antes do @
     var nomeUsuario = email.split("@")[0];
 
+    //Limpa o usuario antigo para evitar conflitos
+    deslogar(false);
+
     // Define o usuário logado e redireciona para o index
-    usuarioLogado = { email: email, nome: nomeUsuario };
-    sessionStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
+    usuarioLogado = { email: email, nome: nomeUsuario, senha: senha};
+    if (lembrarUsuario()) {
+        //Guarda o usuario no localStorage para manter o login.
+        localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
+    }
+    else {
+        //Guarda o usuario na sessionStorage para manter o login apenas na sessão atual.
+        sessionStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
+    }
+
+    //Redireciona para a pÃ¡gina principal
     window.location.href = "index.html";
 
     return true;
 }
 
 function getUsuarioLogado() {
-    return JSON.parse(sessionStorage.getItem("usuarioLogado"));
+    usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado")) || JSON.parse(sessionStorage.getItem("usuarioLogado"));       
+    return usuarioLogado;
 }
 
-function deslogar() {
+function deslogar(p_redirecionar) {
     //Removendo a session do usuario logado e redirecionando para a tela de login
     usuarioLogado = null;
+
     sessionStorage.removeItem("usuarioLogado");
-    window.location.href = "login.html";
+    localStorage.removeItem("usuarioLogado");
+    if (p_redirecionar) {
+        window.location.href = "login.html";
+    }
 }
 
+function lembrarUsuario() {
+    var lembrar = document.getElementById("lembrarMe").checked;
+    return lembrar;
+}
+
+//PARTE DE TREINOS
 //Gerencia a parte de treinos, permitindo criar, editar e deletar treinos
 function iniciarTreinos() {
-    console.log("FUNÇÃO INICIOU")
     let tabela = document.querySelector("#tabelaTreinos tbody")
     let modal = document.getElementById("modal")
 
@@ -181,6 +203,6 @@ function iniciarTreinos() {
     }
 
 
-    // carrega tabela ao abrir página
+    // carrega tabela ao abrir pÃ¡gina
     renderTabela()
 }
