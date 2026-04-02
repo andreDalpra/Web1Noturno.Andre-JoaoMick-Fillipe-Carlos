@@ -3,76 +3,108 @@ console.log("SCRIPT JS CARREGOU");
 // Variável global com o usuário logado
 var usuarioLogado = null;
 
-function validaLogin() {
+function iniciaLogin() {
+
+    //Dados do login
     var email = document.getElementById("EDemail").value.trim();
     var senha = document.getElementById("EDsenha").value.trim();
 
-    //Funcao de erro
-    function erroLogin(p_mensagem) {
-        alert(p_mensagem);
-        document.getElementById("EDemail").value = "";
-        document.getElementById("EDsenha").value = "";
-        document.getElementById("EDemail").focus();
+    //Valida as informações do login
+    if (!validaLogin(email, senha)) {
+        return false;
     }
 
+    //Se deu certo salva no localStorage ou sessionStorage dependendo doq o cara escolher
+    salvarDados(email, senha, lembrarUsuario());
+
+    return true;
+}
+
+function salvarDados(p_email, p_senha, p_lembrar) {
+
+    //Limpa o usuario antigo para evitar conflitos
+    deslogar(false);
+
+    // Extrai o nome de usuário antes do @
+    var nomeUsuario = p_email.split("@")[0];
+
+    //Se o usuario quiser ser lembrado salva no localStorage, senao remove do localStorage q nao fique salvo nada
+    if (p_lembrar) {
+        localStorage.setItem("lembrarUsuario", p_lembrar);
+    }
+    else {
+        localStorage.removeItem("lembrarUsuario");
+    }
+
+    // Define o usuário logado e redireciona para o index
+    if (p_lembrar) {
+        //Guarda o usuario no localStorage para manter o login, com a senha.
+        usuarioLogado = { email: p_email, nome: nomeUsuario, senha: p_senha };
+        localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
+    }
+    else {
+        //Guarda o usuario na sessionStorage para manter o login apenas na sessão atual, sem a senha.
+        usuarioLogado = { email: p_email, nome: nomeUsuario };
+        sessionStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
+    }
+
+    //Redireciona para a página principal
+    window.location.href = "index.html";
+}
+
+function validaLogin(p_email, p_senha) {
+
     // Validação de campos vazios
-    if (email === "" || senha === "") {
-        erroLogin("Por favor, preencha todos os campos.");
+    if (p_email === "" || p_senha === "") {
+        erro("Por favor, preencha todos os campos.");
         return false;
     }
 
     // Validação de formato do email
     var regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regexEmail.test(email)) {
-        erroLogin("Por favor, insira um e-mail válido.");
+    if (!regexEmail.test(p_email)) {
+        erro("Por favor, insira um e-mail válido.", ["EDemail"]);
         return false;
     }
 
     // Validação do tamanho mínimo da senha
-    if (senha.length < 6) {
-        erroLogin("A senha deve ter pelo menos 6 caracteres.");
+    if (p_senha.length < 6) {
+        erro("A senha deve ter pelo menos 6 caracteres.", ["EDsenha"]);
         return false;
     }
-
-    // Extrai o nome de usuário antes do @
-    var nomeUsuario = email.split("@")[0];
-
-    //Limpa o usuario antigo para evitar conflitos
-    deslogar(false);
-
-    // Define o usuário logado e redireciona para o index
-    usuarioLogado = { email: email, nome: nomeUsuario, senha: senha};
-    if (lembrarUsuario()) {
-        //Guarda o usuario no localStorage para manter o login.
-        localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
-    }
-    else {
-        //Guarda o usuario na sessionStorage para manter o login apenas na sessão atual.
-        sessionStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
-    }
-
-    //Redireciona para a pÃ¡gina principal
-    window.location.href = "index.html";
 
     return true;
 }
 
 function getUsuarioLogado() {
-    usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado")) || JSON.parse(sessionStorage.getItem("usuarioLogado"));       
+    usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado")) || JSON.parse(sessionStorage.getItem("usuarioLogado"));
     return usuarioLogado;
 }
 
+//Deslogar o usuario e redireciona pro login com as informações preenchidas, ou limpa lixo na session
 function deslogar(p_redirecionar) {
     //Removendo a session do usuario logado e redirecionando para a tela de login
     usuarioLogado = null;
 
     sessionStorage.removeItem("usuarioLogado");
     localStorage.removeItem("usuarioLogado");
+
+    //Se é loguout e o usuario e a opcao lembrarUsuario for true, redireciona para a tela de login, senao so limpa o usuario logado e deixa na mesma pagina
     if (p_redirecionar) {
         window.location.href = "login.html";
+        if (localStorage.getItem("lembrarUsuario") === "true") {
+            //Joga na pagina de login, com as opcoes da session
+            carregaNoLogin();
+        }
     }
 }
 
+//Preenche os dados do login de um usuario que marcou a opcao "Lembrar-me"
+function carregaNoLogin() {
+    document.getElementById("EDemail").value = localStorage.getItem("usuarioLogado") ? JSON.parse(localStorage.getItem("usuarioLogado")).email : "";
+    document.getElementById("EDsenha").value = localStorage.getItem("usuarioLogado") ? JSON.parse(localStorage.getItem("usuarioLogado")).senha : "";
+    document.getElementById("lembrarMe").checked = localStorage.getItem("lembrarUsuario") === "true";
+}
 function lembrarUsuario() {
     var lembrar = document.getElementById("lembrarMe").checked;
     return lembrar;
