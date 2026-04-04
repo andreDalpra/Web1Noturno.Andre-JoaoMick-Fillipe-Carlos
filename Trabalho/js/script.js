@@ -28,11 +28,12 @@ function salvarDados(p_email, p_senha, p_lembrar) {
     // Extrai o nome de usuário antes do @
     var nomeUsuario = p_email.split("@")[0];
 
-    //Se o usuario quiser ser lembrado salva no localStorage, senao remove do localStorage q nao fique salvo nada
+    //Se o usuario quiser ser lembrado salva no localStorage, senao remove do localStorage para que nao fique salvo nada
     if (p_lembrar) {
-        localStorage.setItem("lembrarUsuario", p_lembrar);
+        localStorage.setItem("lembrarUsuario", "true");
     }
     else {
+        localStorage.removeItem("usuarioLogado");
         localStorage.removeItem("lembrarUsuario");
     }
 
@@ -83,11 +84,10 @@ function getUsuarioLogado() {
 
 //Deslogar o usuario e redireciona pro login com as informações preenchidas, ou limpa lixo na session
 function deslogar(p_redirecionar) {
-    //Removendo a session do usuario logado e redirecionando para a tela de login
-    usuarioLogado = null;
 
     sessionStorage.removeItem("usuarioLogado");
-    localStorage.removeItem("usuarioLogado");
+    //Removendo a session do usuario logado
+    usuarioLogado = null;
 
     //Se é loguout e o usuario e a opcao lembrarUsuario for true, redireciona para a tela de login, senao so limpa o usuario logado e deixa na mesma pagina
     if (p_redirecionar) {
@@ -101,18 +101,26 @@ function deslogar(p_redirecionar) {
 
 //Preenche os dados do login de um usuario que marcou a opcao "Lembrar-me"
 function carregaNoLogin() {
-    document.getElementById("EDemail").value = localStorage.getItem("usuarioLogado") ? JSON.parse(localStorage.getItem("usuarioLogado")).email : "";
-    document.getElementById("EDsenha").value = localStorage.getItem("usuarioLogado") ? JSON.parse(localStorage.getItem("usuarioLogado")).senha : "";
-    document.getElementById("lembrarMe").checked = localStorage.getItem("lembrarUsuario") === "true";
+    if (localStorage.getItem("lembrarUsuario") === "true") {
+        var usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+        if (usuarioLogado) {
+            document.getElementById("EDemail").value = usuarioLogado.email;
+            document.getElementById("EDsenha").value = usuarioLogado.senha;
+            document.getElementById("lembrarMe").checked = true;
+        }
+    }
 }
 function lembrarUsuario() {
     var lembrar = document.getElementById("lembrarMe").checked;
     return lembrar;
 }
 
-//PARTE DE TREINOS
+//
+//PARTE DE TREINOS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+
 //Gerencia a parte de treinos, permitindo criar, editar e deletar treinos
-function iniciarTreinos() {
+function iniciaTreinos() {
     let tabela = document.querySelector("#tabelaTreinos tbody")
     let modal = document.getElementById("modal")
 
