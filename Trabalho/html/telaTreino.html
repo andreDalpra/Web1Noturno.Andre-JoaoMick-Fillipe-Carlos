@@ -5,7 +5,7 @@
         </h3>
     </div>
 
-    <button id="addBtn" class="btn-add">Adicionar</button>
+    <button id="addBtn" class="btn-add" onclick="adicionarTreino()">Adicionar</button>
     <div class="body-treinos">
 
 
@@ -28,18 +28,20 @@
 
             <div class="modal-content">
 
+                 <button type="button" class="close-modal" onclick="fechaModal()">×</button>
+
                 <h3>Treino</h3>
 
-                <input type="text" id="nome" placeholder="Nome do treino">
+                <input type="text" id="EDnome" placeholder="Nome do treino">
 
-                <input type="text" id="grupo" placeholder="Grupo muscular">
+                <input type="text" id="EDgrupo" placeholder="Grupo muscular">
 
-                <input type="number" id="series" placeholder="Séries">
+                <input type="number" id="EDserie" placeholder="Séries">
 
-                <input type="number" id="reps" placeholder="Repetições">
+                <input type="number" id="EDreps" placeholder="Repetições">
 
-                <button id="salvar" class="btn">Salvar</button>
-                <button id="cancelar" class="btn">Cancelar</button>
+                <button type="button" id="salvar" class="btn" onclick="salvarTreino()">Salvar</button>
+            
 
             </div>
         </div>

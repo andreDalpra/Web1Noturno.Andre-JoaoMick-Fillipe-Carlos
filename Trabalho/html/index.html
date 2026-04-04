@@ -16,7 +16,9 @@
     <footer id="rodape" class="footer">
     </footer>
 
-    <script src="../js/script.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/erro.js"></script>
+    <script src="../js/treinos.js"></script>
     <script>
         fetch('header.html')
             .then(response => response.text())
@@ -35,7 +37,7 @@
             .then(data => {
                 document.getElementById('conteudo').innerHTML = data;
                 document.getElementById("nomeUsuario").textContent = getUsuarioLogado()?.nome || "Usuário";
-                iniciaTreinos();
+                iniciaTreino();
             });
     </script>
 </body>
