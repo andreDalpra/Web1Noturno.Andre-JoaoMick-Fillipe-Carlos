@@ -9,7 +9,7 @@ function iniciaLogin() {
     var senha = document.getElementById("EDsenha").value.trim();
 
     //Valida as informações do login
-    if (!validaLogin(email, senha)) {
+    if (!validaLogin(email, senha,)) {
         return false;
     }
 
@@ -21,7 +21,7 @@ function iniciaLogin() {
 
 function salvarDados(p_email, p_senha, p_lembrar) {
 
-    //Limpa o usuario antigo para evitar conflitos
+    //Limpa o usuario antigo para evitar conflitos(somente da session, o localStorage é mantido para lembrar o usuario)
     deslogar(false);
 
     // Extrai o nome de usuário antes do @
@@ -73,6 +73,13 @@ function validaLogin(p_email, p_senha) {
         return false;
     }
 
+    //Valida se as credenciais lembradas são validas, se o usuario tiver marcado a opcao "Lembrar-me" e tiver um usuario salvo no localStorage, compara as 
+    //credenciais do login com as credenciais salvas, se nao for valido mostra o erro de credenciais invalidas
+    if (!validaCredenciaisLembradas(p_email, p_senha)) {
+        erro("Credenciais inválidas.");
+        return false;
+    }
+
     return true;
 }
 
@@ -98,6 +105,23 @@ function deslogar(p_redirecionar) {
     }
 }
 
+function validaCredenciaisLembradas(p_email, p_senha) {
+    //Busca se existe alguem salvo no localStorage
+    var usuarioLembrado = JSON.parse(localStorage.getItem("usuarioLogado"));
+
+    //Se nao tem usuario salvo no localStorage e a opcao lembrarUsuario for false, considera as credenciais validas para permitir o login normal
+    //Senao eu comparo com o usuario salvo no localStorage
+    if (!usuarioLembrado && !lembrarUsuario()) {
+        return true;
+    }
+
+    //Se tem algo diferente retorna false, se for igual retorna true
+    if (usuarioLembrado && usuarioLembrado.email === p_email && usuarioLembrado.senha === p_senha) {
+        return true;
+    }
+
+    return false;
+}
 //Preenche os dados do login de um usuario que marcou a opcao "Lembrar-me"
 function carregaNoLogin() {
     if (localStorage.getItem("lembrarUsuario") === "true") {

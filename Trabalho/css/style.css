@@ -499,6 +499,26 @@ td {
     transform: scale(1.03);
 }
 
+.acoes-modal {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.acoes-modal .btn {
+    width: 100%;
+}
+
+.btn-limpar {
+    background-color: #d9e1f2;
+    color: #1f2d3d;
+}
+
+.btn-limpar:hover {
+    background-color: #c5d2eb;
+    transform: scale(1.03);
+}
+
 .btn:active {
     transform: translateY(0);
 }
