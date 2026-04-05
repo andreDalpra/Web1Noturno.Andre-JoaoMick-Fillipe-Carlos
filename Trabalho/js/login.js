@@ -75,10 +75,7 @@ function validaLogin(p_email, p_senha) {
 
     //Valida se as credenciais lembradas são validas, se o usuario tiver marcado a opcao "Lembrar-me" e tiver um usuario salvo no localStorage, compara as 
     //credenciais do login com as credenciais salvas, se nao for valido mostra o erro de credenciais invalidas
-    if (!validaCredenciaisLembradas(p_email, p_senha)) {
-        erro("Credenciais inválidas.");
-        return false;
-    }
+    validaCredenciaisLembradas(p_email, p_senha);
 
     return true;
 }
@@ -112,15 +109,14 @@ function validaCredenciaisLembradas(p_email, p_senha) {
     //Se nao tem usuario salvo no localStorage e a opcao lembrarUsuario for false, considera as credenciais validas para permitir o login normal
     //Senao eu comparo com o usuario salvo no localStorage
     if (!usuarioLembrado && !lembrarUsuario()) {
-        return true;
+        return;
     }
 
     //Se tem algo diferente retorna false, se for igual retorna true
     if (usuarioLembrado && usuarioLembrado.email === p_email && usuarioLembrado.senha === p_senha) {
-        return true;
+       return
     }
-
-    return false;
+    erro("Os dados informados nao batem com os dados lembrados")
 }
 //Preenche os dados do login de um usuario que marcou a opcao "Lembrar-me"
 function carregaNoLogin() {
