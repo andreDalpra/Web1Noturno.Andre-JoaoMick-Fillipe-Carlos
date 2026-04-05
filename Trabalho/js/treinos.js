@@ -31,6 +31,7 @@ function adicionarTreino() {
 
 //Chamado no botao de salvar no modal de treino
 function salvarTreino() {
+
     //Primeiro validar os campos
     if (!validarTreino()) {
         return;
@@ -44,20 +45,33 @@ function salvarTreino() {
         reps: reps.value.trim()
     };
 
-    //Salvar o treino no localStorage
-    salvarTreinoLocalStorage(treino);
+    //Define se é para substituir ou editar o treino dependendo se o editIndex tem valor ou nao
+    if (editIndex !== null) {
+        // Recuperar os treinos do localStorage
+        let treinos = obterTreinos();
 
+        // Substituir o treino no array
+        treinos[editIndex] = treino;
+
+        // Salvar o array atualizado no localStorage
+        localStorage.setItem("treinos", JSON.stringify(treinos));
+
+        // Resetar o editIndex após a edição
+        editIndex = null;
+    } else {
+        //Salvar o treino no localStorage, pois é um novo treino
+        salvarTreinoLocalStorage(treino);
+    }
     //Fechar o modal
     fechaModal();
 
     //Recarregar a tabela de treinos apos adicionar o novo treino
     carregarTabelaTreinos();
-
 }
 
 function editarTreino(p_index) {
     // Recuperar os treinos do localStorage
-    let treinos = JSON.parse(localStorage.getItem("treinos")) || [];
+    let treinos = obterTreinos();
 
     // Obter o treino a ser editado
     let treino = treinos[p_index];
@@ -76,8 +90,13 @@ function editarTreino(p_index) {
 }
 
 function excluirTreino(p_index) {
+    //Confirmação para evitar exclusões acidentais
+    if (!confirm("Voce realmente quer excluir este treino?")) {
+        return;
+    }
+
     // Recuperar os treinos do localStorage
-    let treinos = JSON.parse(localStorage.getItem("treinos")) || [];
+    let treinos = obterTreinos();
 
     // Remover o treino do array
     treinos.splice(p_index, 1);
@@ -92,23 +111,23 @@ function excluirTreino(p_index) {
 function salvarTreinoLocalStorage(p_treino) {
     // Recuperar os treinos do localStorage
     let treinos = JSON.parse(localStorage.getItem("treinos")) || [];
-    
+
     // Adicionar o novo treino
     treinos.push(p_treino);
-    
+
     // Salvar de volta no localStorage
     localStorage.setItem("treinos", JSON.stringify(treinos));
 }
 
 function carregarTabelaTreinos() {
     // Limpar a tabela
-    tabelaTreinos.innerHTML = "";   
+    tabelaTreinos.innerHTML = "";
 
     // Recuperar os treinos do localStorage
-    let treinos = JSON.parse(localStorage.getItem("treinos")) || [];
+    let treinos = obterTreinos();
 
     // Preencher a tabela com os treinos
-    treinos.forEach(function(treino, index) {
+    treinos.forEach(function (treino, index) {
         //Inserindo cada coluna do treino na tabela
         let row = tabelaTreinos.insertRow();
         row.insertCell(0).textContent = treino.nome;
@@ -116,16 +135,21 @@ function carregarTabelaTreinos() {
         row.insertCell(2).textContent = treino.series;
         row.insertCell(3).textContent = treino.reps;
 
-        
+
         let cellAcoes = row.insertCell(4);
 
-       cellAcoes.innerHTML = `
-    <button onclick="editarTreino(${index})">✏️</button>
-    <button onclick="excluirTreino(${index})">❌</button>
+        cellAcoes.innerHTML = `
+    <button class="btn-editar-treino" onclick="editarTreino(${index})" title="Editar treino">✎</button>
+    <button class="btn-excluir-treino" onclick="excluirTreino(${index})" title="Excluir treino">✕</button>
 `;
     });
 }
 
+function obterTreinos() {
+    // Recuperar os treinos do localStorage
+    let treinos = JSON.parse(localStorage.getItem("treinos")) || [];
+    return treinos;
+}
 
 function validarTreino() {
     //Variaveis com .trim() somente para validar.
@@ -170,9 +194,9 @@ function limparCampos() {
 }
 
 function abreModal() {
-    document.getElementById("modal").style.display = "block";
+    document.getElementById("modal").classList.add("modal-aberto");
 }
 
 function fechaModal() {
-    document.getElementById("modal").style.display = "none";
+    document.getElementById("modal").classList.remove("modal-aberto");
 }
