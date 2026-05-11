@@ -5,48 +5,64 @@
         </h3>
     </div>
 
-    <button id="addBtn" class="btn-add" onclick="adicionarTreino()">Adicionar</button>
-    <div class="body-treinos">
+    <div class="md2-table-card">
+        <div class="md2-table-header">
+            <h3>Treinos cadastrados</h3>
+            <button type="button" class="md3-button-filled" onclick="adicionarTreino()">
+                Adicionar treino
+            </button>
+        </div>
 
+        <div class="md2-table-container">
+            <table id="tabelaTreinos" class="md2-data-table">
+                <thead>
+                    <tr>
+                        <th class="col-check">
+                            <input type="checkbox" aria-label="Selecionar todos">
+                        </th>
+                        <th class="col-status">Status</th>
+                        <th class="col-nome">Nome</th>
+                        <th class="col-grupo">Grupo muscular</th>
+                        <th class="numeric col-series">Series</th>
+                        <th class="numeric col-reps">Repeticoes</th>
+                        <th class="col-acoes">Acoes</th>
+                    </tr>
+                </thead>
 
-        <table id="tabelaTreinos">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Grupo Muscular</th>
-                    <th>Séries</th>
-                    <th>Repetições</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
+                <tbody></tbody>
+            </table>
+        </div>
 
-            <tbody></tbody>
-        </table>
+        <div class="md2-table-footer">
+            <span id="infoPaginacao">0-0 de 0</span>
+            <button type="button" onclick="paginaAnterior()">‹</button>
+            <button type="button" onclick="proximaPagina()">›</button>
+        </div>
+    </div>
 
-        <!-- MODAL -->
-        <div id="modal" class="modal-treino">
+    <!-- MODAL -->
+    <div id="modal" class="modal-treino">
 
-            <div class="modal-content">
+        <div class="modal-content">
 
-                 <button type="button" class="close-modal" onclick="fechaModal()">×</button>
+            <button type="button" class="close-modal" onclick="fechaModal()">×</button>
 
-                <h3>Treino</h3>
+            <h3>Treino</h3>
 
-                <input type="text" id="EDnome" placeholder="Nome do treino">
+            <input type="text" id="EDnome" placeholder="Nome do treino">
 
-                <input type="text" id="EDgrupo" placeholder="Grupo muscular">
+            <input type="text" id="EDgrupo" placeholder="Grupo muscular">
 
-                <input type="number" id="EDserie" placeholder="Séries">
+            <input type="number" id="EDserie" placeholder="Séries">
 
-                <input type="number" id="EDreps" placeholder="Repetições">
+            <input type="number" id="EDreps" placeholder="Repetições">
 
-                <div class="acoes-modal">
-                    <button type="button" id="limparTreino" class="btn btn-limpar" onclick="limparCampos()">Limpar</button>
-                    <button type="button" id="salvar" class="btn" onclick="salvarTreino()">Salvar</button>
-                </div>
-             
-
+            <div class="acoes-modal">
+                <button type="button" id="limparTreino" class="btn btn-limpar" onclick="limparCampos()">Limpar</button>
+                <button type="button" id="salvar" class="btn" onclick="salvarTreino()">Salvar</button>
             </div>
+
+
         </div>
     </div>
 </section>

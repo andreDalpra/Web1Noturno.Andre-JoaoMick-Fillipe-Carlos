@@ -130,13 +130,25 @@ function carregarTabelaTreinos() {
     treinos.forEach(function (treino, index) {
         //Inserindo cada coluna do treino na tabela
         let row = tabelaTreinos.insertRow();
-        row.insertCell(0).textContent = treino.nome;
-        row.insertCell(1).textContent = treino.grupo;
-        row.insertCell(2).textContent = treino.series;
-        row.insertCell(3).textContent = treino.reps;
 
+        let cellCheck = row.insertCell(0);
+        cellCheck.className = "col-check";
+        cellCheck.innerHTML = `<input type="checkbox" aria-label="Selecionar treino">`;
 
-        let cellAcoes = row.insertCell(4);
+        row.insertCell(1).textContent = "Ativo";
+        row.insertCell(2).textContent = treino.nome;
+        row.insertCell(3).textContent = treino.grupo;
+
+        let cellSeries = row.insertCell(4);
+        cellSeries.textContent = treino.series;
+        cellSeries.className = "numeric";
+
+        let cellReps = row.insertCell(5);
+        cellReps.textContent = treino.reps;
+        cellReps.className = "numeric";
+
+        let cellAcoes = row.insertCell(6);
+        cellAcoes.className = "col-acoes";
 
         cellAcoes.innerHTML = `
     <button class="btn-editar-treino" onclick="editarTreino(${index})" title="Editar treino">✎</button>
