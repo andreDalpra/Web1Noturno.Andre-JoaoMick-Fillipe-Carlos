@@ -62,119 +62,140 @@ td {
     padding: 10px;
     text-align: center;
 }
-
 /*LOGIN.HTML*/
+
+/* =========================
+   LOGIN PAGE
+========================= */
+
 .login-page {
     background-color: var(--cinza_login);
-    /*height: 100vh;*/
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
 
+/* CARD */
 .container-login {
     width: 100%;
     max-width: 560px;
+
     padding: 56px 40px 40px;
 
-    background-color: white;
+    background-color: var(--branco);
     border-radius: 24px;
 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 
     text-align: center;
-    min-height: 420px;
 }
 
-.login-logo{
+/* LOGO */
+.login-logo {
     display: flex;
     justify-content: center;
+
     margin-bottom: 20px;
-    font-size: 64px;
+
+    font-size: 52px;
     font-weight: 700;
-    line-height: 1;
+
     color: var(--azul_escuro);
-    letter-spacing: 0.5px;
 }
 
-.form-login input {
-    width: 100%;
-    padding: 14px 16px;
-    /* input maior */
-    font-size: 16px;
+/* SUBTÍTULO */
+.login-subtitulo {
+    font-size: 15px;
+    margin-bottom: 28px;
 
-    border-radius: 8px;
-    border: 1px solid #ccc;
+    color: var(--cinza_escuro);
 }
 
-.btn {
-    width: 100%;
-    padding: 14px 16px;
-    /* botão maior */
-    background-color: var(--azul_claro);
-    color: white;
+/* =========================
+   INPUT M3 CORRIGIDO (SEM ESPAÇO BUGADO)
+========================= */
 
-    border: none;
-    border-radius: 8px;
-
-    font-size: 16px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: all 0.3s ease;
-}
-
-.btn:hover {
-    background-color: var(--azul_escuro);
-    transform: scale(1.03);
-}
-
-.btn:active {
-    transform: translateY(0);
-}
-
-.form-login input::placeholder {
-    color: var(--cinza);
-    font-family: var(--font_login);
-    font-weight: 430;
-}
-
-.form-login {
+.input-group {
+    position: relative;
     margin-bottom: 15px;
 }
 
-.login-subtitulo {
+/* INPUT - CENTRALIZAÇÃO PERFEITA */
+.input-group input {
+    width: 100%;
+    height: 56px;
+
+    padding: 16px 14px 0 14px; /* CORREÇÃO PRINCIPAL */
+
     font-size: 16px;
-    margin-bottom: 28px;
-    color: var(--cinza_escuro);
-    text-align: center;
+    line-height: normal;
+
+    border-radius: 12px;
+    border: 2px solid var(--cinza);
+
+    background: var(--branco);
+    outline: none;
+
+    box-sizing: border-box;
 }
+
+/* LABEL dentro do input */
+.input-group label {
+    position: absolute;
+    left: 14px;
+    top: 18px;
+
+    color: var(--cinza);
+    font-size: 16px;
+
+    background: var(--branco);
+    padding: 0 6px;
+
+    pointer-events: none;
+}
+
+/* FLOAT correto */
+.input-group input:focus + label,
+.input-group input:valid + label {
+    top: 0;
+    transform: translateY(-50%);
+    font-size: 12px;
+
+    color: var(--azul_claro);
+}
+
+/* foco */
+.input-group input:focus {
+    border-color: var(--azul_claro);
+}
+
+/* =========================
+   OPÇÕES
+========================= */
 
 .login-opcoes {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     margin: 10px 0 20px;
 }
 
 .lembrar-me {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 15px;
+
+    font-size: 14px;
     color: var(--cinza_escuro);
-    cursor: pointer;
-    transition: color 0.2s ease, opacity 0.2s ease;
 }
 
-.lembrar-me:hover {
-    color: #3f3f3f;
-}
+.lembrar-me input {
+    width: 18px;
+    height: 18px;
 
-.lembrar-me:hover input {
-    opacity: 0.85;
+    accent-color: var(--azul_claro);
 }
 
 .esqueceu-senha {
@@ -184,22 +205,41 @@ td {
     font-weight: 600;
 }
 
-.esqueceu-senha:hover {
-    color: var(--azul_escuro);
-    text-decoration: underline;
+/* =========================
+   BOTÃO
+========================= */
+
+.btn {
+    width: 100%;
+    padding: 14px;
+
+    background-color: var(--azul_claro);
+    color: var(--branco);
+
+    border: none;
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
 }
 
-.lembrar-me input {
-    width: 18px;
-    height: 18px;
-    margin: 0;
-    accent-color: var(--azul_claro);
-    cursor: pointer;
+.btn:hover {
+    background-color: var(--azul_escuro);
+    transform: scale(1.02);
 }
+
+/* =========================
+   CADASTRO
+========================= */
 
 .cadastro-link {
     margin-top: 28px;
     font-size: 15px;
+
     color: var(--cinza_escuro);
 }
 
@@ -209,20 +249,19 @@ td {
     font-weight: 600;
 }
 
-.cadastro-link a:hover {
-    text-decoration: underline;
-}
+/* =========================
+   LAYOUT
+========================= */
 
 .titulo-login {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex: 1;
+
     width: 100%;
     padding: 48px 20px;
 }
-
 /* HEADER CSS */
 * {
     margin: 0;
