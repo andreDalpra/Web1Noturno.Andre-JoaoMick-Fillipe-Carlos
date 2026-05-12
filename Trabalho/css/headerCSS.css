@@ -1,0 +1,250 @@
+/*reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* VARIÁVEIS DE CORES */
+    --azul_claro: #0044E1;
+    --azul_escuro: #001EFF;
+    --azul_mais_escuro: #0044E1;
+    --branco: #FFFFFF;
+    --cinza: #AFB9C1;
+    --cinza_login: #FAF9F5;
+    --cinza_escuro: #6b6b6b;
+    --font_login: 'anthropicSans', sans-serif;
+}
+
+/* HEADER */
+header
+{
+    height: 94px;
+    background: var(--azul_claro);
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.header
+{
+    display: flex;
+    align-items: center;
+}
+
+.menu > ul
+{
+    list-style: none;
+    display: flex;
+    gap: 8px;
+}
+
+.menu a
+{
+    color: var(--branco);
+    text-decoration: none;
+    font-size: 15px;
+    padding: 10px 16px;
+    display: block;
+
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 8px;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+/* HOVER */
+.menu a:hover
+{
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.menu a:active
+{
+    transform: scale(0.97);
+}
+
+.menu a::after
+{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.menu a.active::before
+{
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    bottom: 6px;
+    width: 4px;
+    border-radius: 4px;
+    background: var(--branco);
+}
+
+.menu a:active::after
+{
+    opacity: 1;
+}
+
+.menu a.active
+{
+    background: rgba(255, 255, 255, 0.25);
+    font-weight: 600;
+}
+
+/* DROPDOWN */
+.dropdown
+{
+    position: relative;
+}
+
+.submenu
+{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    
+    background: var(--azul_claro);
+    list-style: none;
+
+    border-radius: 12px;
+    min-width: 180px;
+    padding: 8px 0;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    pointer-events: none;
+
+    transition: all 0.25s ease;
+}
+
+/* ITENS DO SUBMENU */
+.submenu li a
+{
+    display: block;
+    padding: 10px 16px;
+    color: var(--branco);
+    border-radius: 8px;
+    transition: 0.2s ease;
+}
+
+.submenu li a:hover
+{
+    background: rgba(0, 0, 0, 0.06);
+}
+
+/* ABRIR DROPDOWN */
+.dropdown:hover .submenu
+{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* USER AREA */
+.user-area
+{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    height: auto;
+}
+
+/* BOTÃO USUARIO */
+.dropdown-user
+{
+    position: relative;
+}
+
+.dropdown-user a
+{
+    color: var(--branco);
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    transition: 0.2s ease;
+}
+
+.dropdown-user a:hover
+{
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* SUBMENU USER */
+.submenu-user
+{
+    position: absolute;
+    top: 110%;
+    right: 0;
+
+    background: var(--azul_claro);
+    border-radius: 12px;
+    min-width: 160px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+
+    transition: all 0.25s ease;
+}
+
+.dropdown-user:hover .submenu-user
+{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* ITENS USER */
+.submenu-user li
+{
+    list-style: none;
+}
+
+.submenu-user a
+{
+    display: block;
+    padding: 10px 16px;
+    color: var(--branco);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.2s ease;
+}
+
+.submenu-user a:hover
+{
+    background: rgba(0, 0, 0, 0.06);
+}
+
+/* BOTÃO SAIR */
+.submenu-user li:last-child a:hover
+{
+    background: rgba(0, 0, 0, 0.08);
+    color: red;
+}
+
+#cabecalho {
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+}

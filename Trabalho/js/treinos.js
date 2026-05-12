@@ -16,6 +16,9 @@ function iniciaTreino() {
     serie = document.getElementById("EDserie");
     reps = document.getElementById("EDreps");
 
+    //Campos da table
+    checkbox = document.getElementById("CKtreinos");
+
     //Carrega a tabela de treinos
     carregarTabelaTreinos();
 }
@@ -130,19 +133,79 @@ function carregarTabelaTreinos() {
     treinos.forEach(function (treino, index) {
         //Inserindo cada coluna do treino na tabela
         let row = tabelaTreinos.insertRow();
-        row.insertCell(0).textContent = treino.nome;
-        row.insertCell(1).textContent = treino.grupo;
-        row.insertCell(2).textContent = treino.series;
-        row.insertCell(3).textContent = treino.reps;
 
+        let cellCheck = row.insertCell(0);
+        cellCheck.className = "col-check";
+        cellCheck.innerHTML = `<input type="checkbox" class="check-treino" aria-label="Selecionar treino" onclick="marcarLinhaSelecionada(this)">`;
 
-        let cellAcoes = row.insertCell(4);
+        row.insertCell(1).textContent = "Ativo";
+        row.insertCell(2).textContent = treino.nome;
+        row.insertCell(3).textContent = treino.grupo;
+
+        let cellSeries = row.insertCell(4);
+        cellSeries.textContent = treino.series;
+        cellSeries.className = "numeric";
+
+        let cellReps = row.insertCell(5);
+        cellReps.textContent = treino.reps;
+        cellReps.className = "numeric";
+
+        let cellAcoes = row.insertCell(6);
+        cellAcoes.className = "col-acoes";
 
         cellAcoes.innerHTML = `
-    <button class="btn-editar-treino" onclick="editarTreino(${index})" title="Editar treino">✎</button>
     <button class="btn-excluir-treino" onclick="excluirTreino(${index})" title="Excluir treino">✕</button>
+    <button class="btn-editar-treino" onclick="editarTreino(${index})" title="Editar treino">✎</button>
 `;
     });
+
+    atualizarCheckTodosTreinos();
+}
+
+function selecionarTodosTreinos() {
+    let checksTreinos = document.querySelectorAll(".CKtreinos");
+
+    checksTreinos.forEach(function (check) {
+        check.checked = ckTodosTreinos.checked;
+
+        let linha = check.closest("tr");
+
+        if (check.checked) {
+            linha.classList.add("linha-selecionada");
+        } else {
+            linha.classList.remove("linha-selecionada");
+        }
+    });
+}
+
+
+function atualizarCheckTodosTreinos() {
+    let checksTreinos = document.querySelectorAll(".check-treino");
+
+    if (!checkbox) {
+        return;
+    }
+
+    if (checksTreinos.length === 0) {
+        checkTodos.checked = false;
+        return;
+    }
+
+    checkTodos.checked = Array.from(checksTreinos).every(function (check) {
+        return check.checked;
+    });
+}
+
+function marcarLinhaSelecionada(p_check) {
+    let linha = p_check.closest("tr");
+
+    if (p_check.checked) {
+        linha.classList.add("linha-selecionada");
+    } else {
+        linha.classList.remove("linha-selecionada");
+    }
+
+    atualizarCheckTodosTreinos();
 }
 
 function obterTreinos() {
