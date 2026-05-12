@@ -55,7 +55,7 @@
 
 .md2-data-table th {
     height: 56px;
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.54);
     text-align: left;
@@ -68,6 +68,10 @@
     color: rgba(0, 0, 0, 0.87);
     text-align: left;
     vertical-align: middle;
+}
+
+.md2-data-table tbody tr.linha-selecionada {
+    background-color: rgba(0, 0, 0, 0.08);
 }
 
 .md2-data-table tbody tr:hover {
@@ -177,6 +181,29 @@
     margin: 0;
     accent-color: var(--azul_claro);
 }
+
+.CKtreinos-hover {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.CKtreinos-hover:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.CKtreinos-hover input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: var(--azul_claro);
+}
+
 
 /* MODAL */
 .body-treinos {
@@ -347,5 +374,3 @@
     background-color: #b53333;
     transform: translateY(-1px);
 }
-/* TELA TREINOS - fim */
-
