@@ -1,35 +1,87 @@
+<a class="logo" href="index.html">
+    Fit Manager
+</a>
 
-    <div class="left-area">
-        <a class="logo" href="index.html">
-            Fit Manager
+<nav class="menu">
+    <ul>
+
+        <li>
+            <a href="#">
+
+                <span class="material-symbols-outlined">
+                    dashboard
+                </span>
+
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+
+                <span class="material-symbols-outlined">
+                    fitness_center
+                </span>
+
+                Treinos
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+
+                <span class="material-symbols-outlined">
+                    exercise
+                </span>
+
+                Exercícios
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+
+                <span class="material-symbols-outlined">
+                    monitoring
+                </span>
+
+                Progresso
+            </a>
+        </li>
+
+    </ul>
+</nav>
+
+<div class="user-area">
+
+    <div class="dropdown-user">
+
+        <a href="#">
+
+            Olá, <span id="nomeHeader"></span>
+        
+            <span class="material-symbols-outlined">
+                account_circle
+            </span>
+        
+            ▼
         </a>
 
-        <nav class="menu">
-            <ul>
-                <li class="dropdown">
-                    <a href="#">Menu ▼</a>
+        <ul class="submenu-user">
 
-                    <ul class="submenu">
-                        <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Treinos</a></li>
-                        <li><a href="#">Exercícios</a></li>
-                        <li><a href="#">Progresso</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </div>
+            <li>
+                <a href="#" onclick="deslogar(true); return false;">
 
-    <div class="user-area">
-        <ul>
-            <li class="dropdown-user">
-                <a href="#">
-                    Olá, <span id="nomeHeader"></span> ▼
+                    <span class="material-symbols-outlined">
+                        logout
+                    </span>
+
+                    Sair
                 </a>
-
-                <ul class="submenu-user">
-                    <li><a href="#" onclick="deslogar(true); return false;">Sair</a></li>
-                </ul>
             </li>
+
         </ul>
+
     </div>
+
+</div>
