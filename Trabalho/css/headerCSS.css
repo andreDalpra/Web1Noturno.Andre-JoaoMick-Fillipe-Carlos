@@ -1,5 +1,5 @@
-/*reset */
-*{
+/* RESET */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -158,13 +158,13 @@ header
 /* USER AREA */
 .user-area
 {
+    justify-self: end;
+
     display: flex;
     align-items: center;
-    margin-left: auto;
-    height: auto;
 }
 
-/* BOTÃO USUARIO */
+/* DROPDOWN USER */
 .dropdown-user
 {
     position: relative;

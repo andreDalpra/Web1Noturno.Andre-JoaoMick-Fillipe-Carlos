@@ -306,7 +306,7 @@ td {
     list-style: none;
     display: flex;
 }
-
+/*
 .menu a {
     color: white;
     text-decoration: none;
@@ -314,7 +314,7 @@ td {
     padding: 8px 12px;
     display: block;
 }
-
+*/
 /* DROPDOWN */
 
 .dropdown {
@@ -352,13 +352,13 @@ td {
 }
 
 /* USUARIO */
-
+/*
 .user-area {
     background: #0044E1;
     padding: 8px 15px;
     border-radius: 6px;
 }
-
+*/
 /* DROPDOWN USUÁRIO */
 
 .user-area ul {
@@ -397,10 +397,6 @@ td {
     padding: 10px 15px;
 }
 
-.submenu-user li:hover {
-    background: #0A02E0;
-    border-radius: 6px;
-}
 
 .submenu-user a {
     color: white;
