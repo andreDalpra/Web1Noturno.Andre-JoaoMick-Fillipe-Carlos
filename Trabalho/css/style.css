@@ -233,8 +233,8 @@ td {
 
 /* TEXTO ERRO */
 .error-text {
-    display: none;
-    margin-top: 2px;
+      display: none;
+    margin-top: -8px;  
     margin-left: 14px;
     font-size: 12px;
     line-height: 1.4;
