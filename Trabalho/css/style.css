@@ -142,9 +142,7 @@ td {
 
 /* FLOAT correto */
 .input-group input:focus+label,
-.input-group input:not(:placeholder-shown)+label,
-.input-group select:focus+label,
-.input-group select+label {
+.input-group input:not(:placeholder-shown)+label {
     top: 0;
     transform: translateY(-50%);
     font-size: 12px;
@@ -230,8 +228,7 @@ td {
 
 /* ========================= ERRO M3 ========================= */
 /* INPUT ERRO */
-.input-group.error input,
-.input-group.error select {
+.input-group.error input {
     border-color: #B3261E;
 }
 
@@ -242,8 +239,8 @@ td {
 
 /* TEXTO ERRO */
 .error-text {
-    display: none;
-    margin-top: 2px;
+      display: none;
+    margin-top: -8px;  
     margin-left: 14px;
     font-size: 12px;
     line-height: 1.4;
