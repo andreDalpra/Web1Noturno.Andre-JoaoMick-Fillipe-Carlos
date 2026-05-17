@@ -38,6 +38,7 @@ function adicionarTreino() {
 //Chamado no botao de salvar no modal de treino
 function salvarTreino() {
 
+     
     //Primeiro validar os campos
     if (!validarTreino()) {
         return;
@@ -257,6 +258,28 @@ function atualizarInfoTabela(p_totalTreinos) {
     infoPaginacao.textContent = "1-" + Math.min(p_totalTreinos, 5) + " de " + p_totalTreinos;
 }
 
+function mudarOrdenacao(p_botao) {
+    let botoesOrdenacao = document.querySelectorAll(".md2-sort-header");
+    let iconeClicado = p_botao.querySelector(".material-symbols-outlined");
+    let estavaAtivo = p_botao.classList.contains("md2-sort-active");
+    let estavaDescendo = iconeClicado.textContent.trim() === "arrow_downward";
+
+    botoesOrdenacao.forEach(function (botao) {
+        let icone = botao.querySelector(".material-symbols-outlined");
+
+        botao.classList.remove("md2-sort-active");
+        icone.textContent = "arrow_downward";
+    });
+
+    p_botao.classList.add("md2-sort-active");
+
+    if (estavaAtivo && estavaDescendo) {
+        iconeClicado.textContent = "arrow_upward";
+    } else {
+        iconeClicado.textContent = "arrow_downward";
+    }
+}
+
 function obterTreinos() {
     // Recuperar os treinos do localStorage
     let treinos = JSON.parse(localStorage.getItem("treinos")) || [];
@@ -270,9 +293,25 @@ function validarTreino() {
     let serieTreino = serie.value.trim();
     let repsTreino = reps.value.trim();
 
-    if (nomeTreino === "" || grupoTreino === "" || serieTreino === "" || repsTreino === "") {
+    //Antes de validar os treinos primeiro removo o erro caso tenha alguma validação anterior
+    limparErro("EDnome");
+    limparErro("EDgrupo");
+    limparErro("EDserie");
+    limparErro("EDreps");
+
+    if (nomeTreino === "" & grupoTreino === "" & serieTreino === "" & repsTreino === "") {
         erro("Por favor, preencha todos os campos do treino.", ["EDnome", "EDgrupo", "EDserie", "EDreps"]);
         return false;
+    }
+
+    if (nomeTreino === "") {
+        erro("Por favor, preenche o nome do treino", ["EDnome"]);
+        return false
+    }
+
+    if (grupoTreino === "") {
+        erro("Por favor, selecione o grupo musculçar do treino.", ["EDgrupo"]);
+        return false
     }
 
     if (nomeTreino.length < 3) {
