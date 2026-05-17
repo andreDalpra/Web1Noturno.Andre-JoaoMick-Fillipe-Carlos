@@ -1,5 +1,7 @@
 //Variaveis globais da tela
 let tabelaTreinos = null;
+let checkbox = null;
+let infoPaginacao = null;
 
 //Campos do modal
 let nome = null;
@@ -18,6 +20,7 @@ function iniciaTreino() {
 
     //Campos da table
     checkbox = document.getElementById("CKtreinos");
+    infoPaginacao = document.getElementById("infoPaginacao");
 
     //Carrega a tabela de treinos
     carregarTabelaTreinos();
@@ -81,7 +84,7 @@ function editarTreino(p_index) {
 
     // Preencher os campos do modal com os dados do treino
     nome.value = treino.nome;
-    grupo.value = treino.grupo;
+    selecionarGrupoMuscular(treino.grupo);
     serie.value = treino.series;
     reps.value = treino.reps;
 
@@ -138,7 +141,13 @@ function carregarTabelaTreinos() {
         cellCheck.className = "col-check";
         cellCheck.innerHTML = `<input type="checkbox" class="check-treino" aria-label="Selecionar treino" onclick="marcarLinhaSelecionada(this)">`;
 
-        row.insertCell(1).textContent = "Ativo";
+        let cellStatus = row.insertCell(1);
+        cellStatus.innerHTML = `
+    <button type="button" class="md2-inline-menu" title="Status do treino">
+        Ativo
+        <span class="material-symbols-outlined">arrow_drop_down</span>
+    </button>
+`;
         row.insertCell(2).textContent = treino.nome;
         row.insertCell(3).textContent = treino.grupo;
 
@@ -154,19 +163,25 @@ function carregarTabelaTreinos() {
         cellAcoes.className = "col-acoes";
 
         cellAcoes.innerHTML = `
-    <button class="btn-excluir-treino" onclick="excluirTreino(${index})" title="Excluir treino">✕</button>
-    <button class="btn-editar-treino" onclick="editarTreino(${index})" title="Editar treino">✎</button>
+    <button class="btn-excluir-treino" onclick="excluirTreino(${index})" title="Excluir treino">
+        <span class="material-symbols-outlined">delete</span>
+    </button>
+    <button class="btn-editar-treino" onclick="editarTreino(${index})" title="Editar treino">
+        <span class="material-symbols-outlined">edit</span>
+    </button>
 `;
     });
 
     atualizarCheckTodosTreinos();
+    atualizarInfoTabela(treinos.length);
 }
 
 function selecionarTodosTreinos() {
-    let checksTreinos = document.querySelectorAll(".CKtreinos");
+    let checksTreinos = document.querySelectorAll(".check-treino");
 
     checksTreinos.forEach(function (check) {
-        check.checked = ckTodosTreinos.checked;
+        
+        check.checked = checkbox.checked;
 
         let linha = check.closest("tr");
 
@@ -176,8 +191,9 @@ function selecionarTodosTreinos() {
             linha.classList.remove("linha-selecionada");
         }
     });
-}
 
+    atualizarCheckTodosTreinos();
+}
 
 function atualizarCheckTodosTreinos() {
     let checksTreinos = document.querySelectorAll(".check-treino");
@@ -187,13 +203,19 @@ function atualizarCheckTodosTreinos() {
     }
 
     if (checksTreinos.length === 0) {
-        checkTodos.checked = false;
+        checkbox.checked = false;
+        checkbox.indeterminate = false;
         return;
     }
 
-    checkTodos.checked = Array.from(checksTreinos).every(function (check) {
+    let totalSelecionados = Array.from(checksTreinos).filter(function (check) {
+        return check.checked;
+    }).length;
+
+    checkbox.checked = Array.from(checksTreinos).every(function (check) {
         return check.checked;
     });
+    checkbox.indeterminate = totalSelecionados > 0 && totalSelecionados < checksTreinos.length;
 }
 
 function marcarLinhaSelecionada(p_check) {
@@ -206,6 +228,33 @@ function marcarLinhaSelecionada(p_check) {
     }
 
     atualizarCheckTodosTreinos();
+}
+
+function selecionarGrupoMuscular(p_grupo) {
+    grupo.value = p_grupo || "";
+
+    if (grupo.value === p_grupo || !p_grupo) {
+        return;
+    }
+
+    let opcao = document.createElement("option");
+    opcao.value = p_grupo;
+    opcao.textContent = p_grupo;
+    grupo.appendChild(opcao);
+    grupo.value = p_grupo;
+}
+
+function atualizarInfoTabela(p_totalTreinos) {
+    if (!infoPaginacao) {
+        return;
+    }
+
+    if (p_totalTreinos === 0) {
+        infoPaginacao.textContent = "0-0 de 0";
+        return;
+    }
+
+    infoPaginacao.textContent = "1-" + Math.min(p_totalTreinos, 5) + " de " + p_totalTreinos;
 }
 
 function obterTreinos() {
@@ -222,17 +271,12 @@ function validarTreino() {
     let repsTreino = reps.value.trim();
 
     if (nomeTreino === "" || grupoTreino === "" || serieTreino === "" || repsTreino === "") {
-        erro("Por favor, preencha todos os campos do treino.");
+        erro("Por favor, preencha todos os campos do treino.", ["EDnome", "EDgrupo", "EDserie", "EDreps"]);
         return false;
     }
 
     if (nomeTreino.length < 3) {
         erro("O nome do treino deve ter pelo menos 3 caracteres.", ["EDnome"]);
-        return false;
-    }
-
-    if (grupoTreino.length < 3) {
-        erro("O grupo muscular deve ter pelo menos 3 caracteres.", ["EDgrupo"]);
         return false;
     }
 
@@ -254,6 +298,11 @@ function limparCampos() {
     grupo.value = "";
     serie.value = "";
     reps.value = "";
+
+    limparErro("EDnome");
+    limparErro("EDgrupo");
+    limparErro("EDserie");
+    limparErro("EDreps");
 }
 
 function abreModal() {

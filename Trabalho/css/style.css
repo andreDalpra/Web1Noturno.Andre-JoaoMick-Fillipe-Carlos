@@ -109,7 +109,8 @@ td {
 }
 
 /* INPUT - CENTRALIZAÇÃO PERFEITA */
-.input-group input {
+.input-group input,
+.input-group select {
     width: 100%;
     height: 46px;
     padding: 18px 14px 18px 14px;
@@ -121,6 +122,10 @@ td {
     background: var(--branco);
     outline: none;
     box-sizing: border-box;
+}
+
+.input-group select {
+    padding: 0 14px;
 }
 
 /* LABEL dentro do input */
@@ -137,7 +142,9 @@ td {
 
 /* FLOAT correto */
 .input-group input:focus+label,
-.input-group input:not(:placeholder-shown)+label {
+.input-group input:not(:placeholder-shown)+label,
+.input-group select:focus+label,
+.input-group select+label {
     top: 0;
     transform: translateY(-50%);
     font-size: 12px;
@@ -145,7 +152,8 @@ td {
 }
 
 /* foco */
-.input-group input:focus {
+.input-group input:focus,
+.input-group select:focus {
     border-color: var(--azul_claro);
 }
 
@@ -222,7 +230,8 @@ td {
 
 /* ========================= ERRO M3 ========================= */
 /* INPUT ERRO */
-.input-group.error input {
+.input-group.error input,
+.input-group.error select {
     border-color: #B3261E;
 }
 
