@@ -142,7 +142,8 @@ td {
 
 /* FLOAT correto */
 .input-group input:focus+label,
-.input-group input:not(:placeholder-shown)+label {
+.input-group input:not(:placeholder-shown)+label,
+.input-group select+label {
     top: 0;
     transform: translateY(-50%);
     font-size: 12px;
@@ -175,6 +176,8 @@ td {
     width: 18px;
     height: 18px;
     accent-color: var(--azul_claro);
+    margin: 0;
+    padding: 0;
 }
 
 .esqueceu-senha {
