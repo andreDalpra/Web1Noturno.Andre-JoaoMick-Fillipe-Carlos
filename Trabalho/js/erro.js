@@ -48,6 +48,10 @@ function erro(mensagem, campos = []) {
             limparErro(idCampo);
         }, { once: true });
 
+        campo.addEventListener("change", function () {
+            limparErro(idCampo);
+        }, { once: true });
+        
     });
 
 }
